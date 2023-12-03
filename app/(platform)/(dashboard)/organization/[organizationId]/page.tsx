@@ -1,5 +1,7 @@
+import { Form } from "./form";
+
 const OrganizationIdPage = () => {
-  return <div>organization page</div>;
+  return <Form />;
 };
 
 export default OrganizationIdPage;
