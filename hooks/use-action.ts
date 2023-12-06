@@ -30,7 +30,7 @@ export const useAction = <TInput, TOutput>(
         const result = await action(input);
 
         if (!result) {
-          return null;
+          return;
         }
 
         setFieldErrors(result.fieldErrors);
