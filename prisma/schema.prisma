@@ -41,9 +41,10 @@ model List {
 }
 
 model Card {
-  id    String @id @default(auto()) @map("_id") @db.ObjectId
-  title String
-  order Int
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  order       Int
+  description String?
 
   listId String @db.ObjectId
   list   List   @relation(fields: [listId], references: [id], onDelete: Cascade)
