@@ -1,27 +1,27 @@
 "use client";
 
-import { KeyboardEventHandler, forwardRef } from "react";
 import { useFormStatus } from "react-dom";
-import { Label } from "../ui/label";
-import { Textarea } from "../ui/textarea";
+import { KeyboardEventHandler, forwardRef } from "react";
 import { cn } from "@/lib/utils";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { FormErrors } from "./form-errors";
 
-interface FormTextAreaProps {
+interface FormTextareaProps {
   id: string;
   label?: string;
   placeholder?: string;
   required?: boolean;
   disabled?: boolean;
-  errors?: Record<string, string[]>;
+  errors?: Record<string, string[] | undefined>;
   className?: string;
-  onClick?: () => void;
   onBlur?: () => void;
+  onClick?: () => void;
   onKeyDown?: KeyboardEventHandler<HTMLTextAreaElement> | undefined;
   defaultValue?: string;
 }
 
-export const FormTextArea = forwardRef<HTMLTextAreaElement, FormTextAreaProps>(
+export const FormTextarea = forwardRef<HTMLTextAreaElement, FormTextareaProps>(
   (
     {
       id,
@@ -30,27 +30,27 @@ export const FormTextArea = forwardRef<HTMLTextAreaElement, FormTextAreaProps>(
       required,
       disabled,
       errors,
-      className,
-      onClick,
       onBlur,
+      onClick,
       onKeyDown,
+      className,
       defaultValue,
     },
-    ref,
+    ref
   ) => {
     const { pending } = useFormStatus();
 
     return (
       <div className="space-y-2 w-full">
         <div className="space-y-1 w-full">
-          (label ? (
-          <Label
-            htmlFor={id}
-            className="font-semibold text-xs text-neutral-700"
-          >
-            {label}
-          </Label>
-          ): null)
+          {label ? (
+            <Label
+              htmlFor="id"
+              className="text-xs font-semibold text-neutral-700"
+            >
+              {label}
+            </Label>
+          ) : null}
           <Textarea
             onKeyDown={onKeyDown}
             onBlur={onBlur}
@@ -62,8 +62,8 @@ export const FormTextArea = forwardRef<HTMLTextAreaElement, FormTextAreaProps>(
             id={id}
             disabled={pending || disabled}
             className={cn(
-              "resize-none focus-visible:ring-0 focus-visible:ring-offset-0 ring-0 focus:ring-0 shadow-sm outline-none",
-              className,
+              "resize-none focus-visible:ring-0 focus-visible:ring-offset-0 ring-0 focus:ring-0 outline-none shadow-sm",
+              className
             )}
             aria-describedby={`${id}-error`}
             defaultValue={defaultValue}
@@ -72,7 +72,7 @@ export const FormTextArea = forwardRef<HTMLTextAreaElement, FormTextAreaProps>(
         <FormErrors id={id} errors={errors} />
       </div>
     );
-  },
+  }
 );
 
-FormTextArea.displayName = "FormTextArea";
+FormTextarea.displayName = "FormTextarea";
